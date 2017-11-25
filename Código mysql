@@ -1,0 +1,2 @@
+
+CREATE TABLE tipo_producto ( tipo CHAR (16) PRIMARY KEY )
