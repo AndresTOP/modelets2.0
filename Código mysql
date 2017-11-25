@@ -1,2 +1,7 @@
 
-CREATE TABLE tipo_producto ( tipo CHAR (16) PRIMARY KEY )
+
+CREATE TABLE producto ( nombre CHAR(15) PRIMARY KEY, fechaSubida DATE NOT NULL);
+
+CREATE TABLE tipo_producto ( tipo CHAR (16) PRIMARY KEY );
+
+
