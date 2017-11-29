@@ -3,10 +3,10 @@
 
 	$name = $_POST['Name'];
 
-	$query= "SELECT * FROM producto WHERE nombre LIKE  '%$name%'";
+	$query= "SELECT * FROM producto WHERE nombreProducto LIKE  '%$name%'";
 	$resultado=mysqli_query($con,$query);
 	if (!$resultado) {
-         echo "No hemos encontrado ningún producto con "." '$name' ";
+         die("Error");
     }
     else {
         $existe= mysqli_num_rows($resultado);
@@ -19,6 +19,9 @@
         	    echo "<a href=mostrarProducto.php?id=$idProducto>$nombreProducto</a>";
         	    echo "<br>";
     	    }
+   	    }
+   	    else{
+   	        echo "No existe ningún producto con "."'$name'";
    	    }
     }
 	
