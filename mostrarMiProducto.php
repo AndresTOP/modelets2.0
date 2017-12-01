@@ -30,11 +30,3 @@ else {
 }
 
 ?>
-<?php
-    if (isset($_SESSION['Nick'])){
-        include "pujar.htm";
-    }
-
-?>
-    
-    

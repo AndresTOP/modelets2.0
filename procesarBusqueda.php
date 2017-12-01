@@ -1,9 +1,15 @@
 <?php
-	include "conexion.php";
-
-	$name = $_POST['Name'];
-
-	$query= "SELECT * FROM producto WHERE nombreProducto LIKE  '%$name%'";
+    session_start();
+    include "conexion.php";
+    $name = $_POST['Name'];
+    if (isset($_SESSION['Nick'])){
+        $miNick=$_SESSION['Nick'];
+        $query= "SELECT * FROM producto WHERE nombreProducto LIKE  '%$name%' and nick!='$miNick'";
+    }
+    else {
+        $query= "SELECT * FROM producto WHERE nombreProducto LIKE  '%$name%'";
+    }
+    
 	$resultado=mysqli_query($con,$query);
 	if (!$resultado) {
          die("Error");
@@ -11,11 +17,11 @@
     else {
         $existe= mysqli_num_rows($resultado);
 	    if ($existe != 0) {
-    	    $reg = mysqli_fetch_array($resultado);
+    	    $rec = mysqli_fetch_array($resultado);
     	    $resultado=mysqli_query($con,$query);
     	    while ($rec = mysqli_fetch_array($resultado)) {
     	        $idProducto = $rec['id'];
-    	        $nombreProducto = $rec['nombre'];
+    	        $nombreProducto = $rec['nombreProducto'];
         	    echo "<a href=mostrarProducto.php?id=$idProducto>$nombreProducto</a>";
         	    echo "<br>";
     	    }
