@@ -1,0 +1,26 @@
+<!DOCTYPE html> "no se si sirve"
+<html>
+<head>
+    <style>
+        body {background-color: white;}
+        h1   {color: blue;}
+        p    {color: green; font-family: "Arial";}
+        h2 { font-family: "Arial";}
+    </style>
+</head>
+<body>
+
+<h1>This is a heading</h1>
+<p>This is a paragraph.</p>
+<h2>This is Times New Roman</h2>
+<h3>Jose es  diabóóóóólico</h3>
+<h3> 77777</h3>
+<p>  La mecánica cuántica es una disciplina de la física encargada de brindar una descripción fundamental de la naturaleza a escalas espaciales pequeñas. Surge tímidamente en los inicios del siglo XX dentro de las tradiciones más profundas de la física para dar una solución a problemas para los que las teorías conocidas hasta el momento habían agotado su capacidad de explicar, como la llamada catástrofe ultravioleta en la radiación de cuerpo negro predicha por la física estadística clásica y la inestabilidad de los átomos en el modelo atómico de Rutherford. La primera propuesta de un principio propiamente cuántico se debe a Max Planck en 1900, para resolver el problema de la radiación de cuerpo negro, que será duramente cuestionado, hasta que Albert Einstein lo convierte en el principio que exitosamente pueda explicar el efecto fotoeléctrico. Las primeras formulaciones matemáticas completas de la mecánica cuántica no se alcanzan hasta mediados de la década de 1920, sin que hasta el día de hoy se tenga una interpretación coherente de la teoría, en particular del problema de la medición.
+</p>
+
+<?php
+
+?>
+
+</body>
+</html>
