@@ -5,17 +5,12 @@
     $nombre = $_POST['Nombre'];
     $descripcion= $_POST['Descripcion'];
     $precio= $_POST['Precio'];
-    $dia= $_POST['Dia'];
-    $mes= $_POST['Mes'];
-    $an= $_POST['Año'];
+    $fecha=$_POST['Fecha'];
     $hora= $_POST['Hora'];
-    $minuto= $_POST['Minuto'];
-    $segundos=$_POST['Segundos'];
     $tipo=$_POST['Tipo'];
-    
     $fechaActual=strtotime(date("d-m-Y H:i:00",time()));
-    $fechaFin=strtotime("$dia-$mes-$an $hora:$minuto:$segundos");
-    
+    $fechaFin=strtotime("$fecha $hora");
+    $fechaActual=$fechaActual+3600;
     if ($fechaActual > $fechaFin){
         echo "<a href='subirProducto.php'>Fecha no válida. Inténtelo de nuevo, por favor </a>";
     } 
@@ -24,11 +19,10 @@
         $query= $query. "nombreProducto='".$nombre."'";
         $query= $query. ",descripcion='".$descripcion."'";
         $query= $query. ",precio=".$precio;
-        $query= $query. ",fechaFin='".$an."-".$mes."-".$dia."'";
+        $query= $query. ",fechaFin='$fecha'";
         $query= $query. ",tipo='".$tipo."'";
-        $query= $query. ",subasta='Si'";
         $query= $query. ",nick='".$nick."'";
-        $query= $query. ",horaFin='".$hora.":".$minuto.":".$segundos."'";
+        $query= $query. ",horaFin='$hora'";
         $pos=strpos($precio,'-');
         if  (!empty($nombre)  and $pos === false){
             if (!ctype_space($nombre)){
@@ -36,6 +30,10 @@
                 $resultado=mysqli_query($con,$query);
                 if (!$resultado){
                     echo "<a href='subirProducto.php'>Precio incorrecto, introduzca uno de nuevo, por favor </a>";
+                }
+                else {
+                    echo "Producto publicado! Los demás usuarios ya podrán pujar por él.";
+                    echo "<a href='index.php'>Seguir Navegando pulsando aquí";
                 }
             }
             else {

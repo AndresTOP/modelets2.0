@@ -35,12 +35,12 @@
 </head>
 <body>
 
-<form action="procesarBusqueda.php" method="POST">
+<form action="procesarBusqueda.php" method="GET">
     <p>Nombre producto: <input type="text" name="Name" value="Buscar producto"> <?php if (isset($REQUEST['Name'])) echo $_REQUEST['Nombre producto']; ?> </p>
     <input type="submit" name="Buscar producto" value="Buscar producto">
 </form>
 
-<form action="procesarBusquedaTipo.php" method="POST">
+<form action="procesarBusquedaTipo.php" method="GET">
     <br>Tipo:
     <select name="Tipo">
       <?php

@@ -5,12 +5,8 @@
 	<h2>Nombre del producto</h2><input name="Nombre">
 	<h2>Descripción</h2><textarea name="Descripcion" rows="10" cols="40">Escribe una descripción</textarea>
 	<h2>Precio (€)</h2><input name="Precio">
-	<h2>Fecha final de subasta</h2>Día<input name="Dia">
-	                               Mes<input name="Mes">
-	                               Año<input name="Año">
-	<h2>Hora final de subasta</h2>Hora<input name="Hora">
-	                               Minuto<input name="Minuto">
-	                               Segundos<input name="Segundos">
+	<h2>Fecha final de subasta</h2><input type="date" name="Fecha">
+	<h2>Hora final de subasta</h2><input type="time" name="Hora">
 	<h2>Tipo:</h2>
     <select name="Tipo">
       <?php
