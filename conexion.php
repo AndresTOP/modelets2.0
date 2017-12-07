@@ -1,3 +1,4 @@
 <?php 
-  $con = mysqli_connect("localhost","id3780785_acl","20172018","id3780785_p2bd2");
+  $con = mysqli_connect("localhost","root","","p2bd2"); #cambiar si es webhost
+  $con->set_charset("utf8");
 ?>

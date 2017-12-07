@@ -4,7 +4,7 @@
     $tipo = $_GET['Tipo'];
     if (isset($_SESSION['Nick'])){
         $miNick= $_SESSION['Nick'];
-        $query= "SELECT * FROM producto WHERE tipo= '$tipo' and nick='$miNick'";
+        $query= "SELECT * FROM producto WHERE tipo= '$tipo' and nick!='$miNick'";
     }
     else {
         $query= "SELECT * FROM producto WHERE tipo= '$tipo'";
@@ -20,11 +20,11 @@
     	    $reg = mysqli_fetch_array($resultado);
     	    $resultado=mysqli_query($con,$query);
     	    while ($rec = mysqli_fetch_array($resultado)) {
-    	        $fecha=$rec['fechaFin'];
-    	        $hora=$rec['horaFin'];
-    	        $fechaActual=strtotime(date("d-m-Y H:i:00",time()));
+                $fecha=$rec['fechaFin'];
+                $hora=$rec['horaFin'];
+                date_default_timezone_set('Europe/Madrid');
+                $fechaActual=time();
                 $fechaFin=strtotime("$fecha $hora");
-                $fechaActual=$fechaActual+3600;
                 if ($fechaActual < $fechaFin){
         	        $idProducto = $rec['id'];
         	        $nombreProducto = $rec['nombreProducto'];

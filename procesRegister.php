@@ -19,6 +19,9 @@ if ($resultado){
 	    $query= $query.",nick='".$nick."'";
 	    $query= $query.",pass='".$pass."'";
 	    $resultat=mysqli_query($con,$query);
+        if (!$resultat){
+            echo "GGs";
+        }
 	    echo "<a href='index.php'>Ya estas registrado! Puedes iniciar sesión en cualquier momento a partir de ahora</a>";
     }
 	
@@ -28,7 +31,7 @@ if ($resultado){
     }
     else{
         if ($existe != 0){
-            echo "Ya existe un usario con nick ".'$nick'." ya utilizado";
+            echo "Ya existe un usario con nick ".$nick." ya utilizado";
             echo "<a href='register.htm'>Intentar de nuevo, por favor</a>";
         } else {
             echo "Hay campos vacíos o incorrectos.";

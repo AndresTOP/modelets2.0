@@ -22,9 +22,9 @@
     	    while ($rec = mysqli_fetch_array($resultado)) {
     	        $fecha=$rec['fechaFin'];
     	        $hora=$rec['horaFin'];
-    	        $fechaActual=strtotime(date("d-m-Y H:i:00",time()));
+    	        date_default_timezone_set('Europe/Madrid');
+                $fechaActual=time();
                 $fechaFin=strtotime("$fecha $hora");
-                $fechaActual=$fechaActual+3600;
                 if ($fechaActual < $fechaFin){
         	        $idProducto = $rec['id'];
         	        $nombreProducto = $rec['nombreProducto'];

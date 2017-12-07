@@ -11,9 +11,9 @@
     $tipo=$_POST['Tipo'];
 
 
-    $fechaActual=strtotime(date("d-m-Y H:i:00",time()));
+    date_default_timezone_set('Europe/Madrid');
+    $fechaActual=time();
     $fechaFin=strtotime("$fecha $hora");
-    $fechaActual=$fechaActual+3600;
     if ($fechaActual > $fechaFin){
         echo "<a href='subirProducto.php'>Fecha no válida. Inténtelo de nuevo, por favor </a>";
     } 
@@ -21,19 +21,24 @@
         $query= "UPDATE producto SET ";
         $query= $query. "nombreProducto='".$nombre."'";
         $query= $query. ",descripcion='".$descripcion."'";
-        $query= $query. ",precio='$precio'";
-        $query= $query. ",fechaFin='$fecha";
+        $query= $query. ",precio=$precio";
+        $query= $query. ",fechaFin='$fecha'";
         $query= $query. ",tipo='".$tipo."'";
         $query= $query. ",nick='".$nick."'";
         $query= $query. ",horaFin='$hora'";
         $query= $query. " WHERE id=$id";
         $pos=strpos($precio,'-');
-        if  (!empty($nombre)  and $pos === false){
+        if  (!empty($nombre) and !empty($fecha) and !empty($hora) and $pos === false){
             if (!ctype_space($nombre)){
                 
                 $resultado=mysqli_query($con,$query);
                 if (!$resultado){
-                    echo "<a href='subirProducto.php'>Precio incorrecto, introduzca uno de nuevo, por favor </a>";
+                    echo "hola";
+                    echo "<a href='subirProducto.php'>Hay algunos campos incorrectos, corrígalos por favor </a>";
+                } 
+                else {
+                    echo "Cambios realizados. Ahora los usuarios podrán pujar por él.";
+                    echo "<a href='index.php'> Seguir navegando aquí</a>";
                 }
             }
             else {
@@ -42,7 +47,7 @@
             
         }
         else{
-            echo "<a href='subirProducto.php'>Precio incorrecto, introduzca uno de nuevo, por favor </a>";
+            echo "<a href='subirProducto.php'>Hay algunos campos incorrectos, corrígalos por favor </a>";
         }
         
         

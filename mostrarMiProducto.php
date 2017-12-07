@@ -23,13 +23,25 @@ if ($existeix >= 1){
   		echo "<br>";
   		echo "<br>";
   		putenv('TZ=Europe/Madrid'); 
-  		$fechaActual=strtotime(date("Y-m-d H:i:s",time()));
-  		$fechaActual=$fechaActual+3600; 
+  		date_default_timezone_set('Europe/Madrid');
+      $fechaActual=time();
         $fechaFin=strtotime($rec['fechaFin']." ".$rec['horaFin']);
         if ($fechaActual > $fechaFin){
             echo "<br>";
             echo "<br>";
-            echo "<a href='modifProducto.php?id=$id'>Modificar producto </a>";
+            $query="SELECT * FROM puja WHERE idProd=$id";
+            $resultado = mysqli_query($con,$query);
+            $nrows= mysqli_num_rows($resultado);
+            if ($nrows != 0){
+              $query = "SELECT nick , MAX(precio) AS precio FROM puja WHERE idProd=$id";
+              $resultado = mysqli_query($con,$query);
+              $rec=mysqli_fetch_array($resultado);
+              echo "El ganador de la subasta es ".$rec['nick']." , con una puja de " .$rec['precio']. " euros";           
+            }
+            else {
+              echo "<a href='modifProducto.php?id=$id'>Modificar producto </a>";
+            }
+            
         } 
         else {
             echo "Fecha de final de subasta: ".$rec['fechaFin']. " Hora final : ".$rec['horaFin'];
