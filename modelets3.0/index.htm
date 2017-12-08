@@ -1,0 +1,9 @@
+<?php
+    include "conexion.php"
+    
+?>
+
+<form action="procesarBusqueda.php" method="POST">
+    <p>Name: <input type="text" name="Name" value="Buscar producto"> <?php if (isset($REQUEST['Name'])) echo $_REQUEST['Name']; ?> </p>
+</form>
+
