@@ -1,0 +1,43 @@
+CREATE DATABASE dbname
+DEFAULT CHARACTER SET utf8
+  DEFAULT COLLATE utf8_unicode_ci;
+
+CREATE TABLE tipo (
+	tipo	VARCHAR(15) 	NOT NULL,
+	PRIMARY KEY(tipo)
+);
+
+CREATE TABLE usuario (
+	nombre	VARCHAR(20)	NOT NULL,
+	apellidos VARCHAR(40)	NOT NULL,
+	correoElectronico VARCHAR(25)	NOT NULL,
+	nick		VARCHAR(20)	NOT NULL,
+	pass		VARCHAR(20)	NOT NULL,
+	PRIMARY KEY (nick)
+);
+
+CREATE TABLE producto (
+	nombreProducto	VARCHAR(20)	NOT NULL,
+	id	INT(11)	NOT NULL AUTO_INCREMENT,
+	descripcion VARCHAR(100),
+	precio	DECIMAL(9,2)	NOT NULL,
+	fechaFin	DATE	NOT NULL,
+	tipo		VARCHAR(15)	NOT NULL,
+	nick		VARCHAR(20),
+	horaFin		TIME	NOT NULL,
+	FOREIGN KEY(tipo) REFERENCES tipo(tipo),
+	FOREIGN KEY(nick) REFERENCES usuario(nick),
+	PRIMARY KEY(id)
+);
+
+CREATE TABLE puja (
+	precio	DECIMAL(9,2) NOT NULL,
+	id	INT(11) NOT NULL AUTO_INCREMENT,
+	nick	VARCHAR(20),
+	idProd	INT(11),
+	FOREIGN KEY (nick) REFERENCES usuario(nick),
+	FOREIGN KEY (idProd) REFERENCES producto(id),
+	PRIMARY KEY (id)
+);
+
+INSERT INTO tipo VALUES ('Informática'), ('Juguetes'), ('Lectura'), ('Moda'), ('Música')
