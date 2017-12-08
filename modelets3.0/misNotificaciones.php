@@ -30,9 +30,10 @@
     date_default_timezone_set('Europe/Madrid');
     $query="SELECT producto.nombreProducto, producto.id, producto.fechaFin, producto.horaFin, MAX(puja.precio) as precio FROM puja INNER JOIN producto ON puja.idProd=producto.id WHERE puja.nick='$nick' GROUP BY producto.nombreProducto";
     $resultado=mysqli_query($con,$query);
-    $nRows =mysqli_num_rows($resultado);
+    $cont = 0;
     
-    if(¢nRows != 0){
+    
+    
         ?>
          <tr>
                 <td class= table-warning>
@@ -68,10 +69,10 @@
 	        }
         }
         
-    } else {
+     if($cont != 0) {
         ?>
             <div class="alert alert-danger" role="alert">
-             <?php echo "No hay ninguna notificación"; ?>
+             <?php echo "No hay ninguna notificación..."; ?>
         </div>
         <?php
     }
