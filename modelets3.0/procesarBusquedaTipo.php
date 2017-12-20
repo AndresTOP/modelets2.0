@@ -26,7 +26,7 @@
     $tipo = $_GET['Tipo'];
     if (isset($_SESSION['Nick'])){
         $miNick= $_SESSION['Nick'];
-        $query= "SELECT * FROM producto WHERE tipo= '$tipo' and nick='$miNick'";
+        $query= "SELECT * FROM producto WHERE tipo= '$tipo' and nick!='$miNick'";
     }
     else {
         $query= "SELECT * FROM producto WHERE tipo= '$tipo'";
