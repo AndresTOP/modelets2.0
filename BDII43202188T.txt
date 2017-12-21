@@ -1,0 +1,57 @@
+CREATE DATABASE BDII43202188T
+DEFAULT CHARACTER SET utf8
+  DEFAULT COLLATE utf8_unicode_ci;
+
+CREATE TABLE tipo (
+	tipo	VARCHAR(15) 	NOT NULL,
+	PRIMARY KEY(tipo)
+);
+
+CREATE TABLE usuario (
+	nombre	VARCHAR(20)	NOT NULL,
+	apellidos VARCHAR(40)	NOT NULL,
+	correoElectronico VARCHAR(25)	NOT NULL,
+	nick		VARCHAR(20)	NOT NULL,
+	pass		VARCHAR(20)	NOT NULL,
+	PRIMARY KEY (nick)
+);
+
+CREATE TABLE producto (
+	nombreProducto	VARCHAR(20)	NOT NULL,
+	id	INT(11)	NOT NULL AUTO_INCREMENT,
+	descripcion VARCHAR(100),
+	precio	DECIMAL(9,2)	NOT NULL,
+	fechaFin	DATE	NOT NULL,
+	tipo		VARCHAR(15)	NOT NULL,
+	nick		VARCHAR(20),
+	horaFin		TIME	NOT NULL,
+	FOREIGN KEY(tipo) REFERENCES tipo(tipo),
+	FOREIGN KEY(nick) REFERENCES usuario(nick),
+	PRIMARY KEY(id)
+);
+
+CREATE TABLE puja (
+	precio	DECIMAL(9,2) NOT NULL,
+	id	INT(11) NOT NULL AUTO_INCREMENT,
+	nick	VARCHAR(20),
+	idProd	INT(11),
+	FOREIGN KEY (nick) REFERENCES usuario(nick),
+	FOREIGN KEY (idProd) REFERENCES producto(id),
+	PRIMARY KEY (id)
+);
+
+INSERT INTO tipo VALUES ('Informática'), ('Juguetes'), ('Lectura'), ('Moda'), ('Música')
+
+INSERT INTO usuario VALUES ('Neil','Gaiman','ngaiman@gmail.com','Sandman', 'sandman'), ('Ian','Curtis', 'icurtis@yahoo.net', 'JoyDivision', 'joydivision'), ('Arturo', 'Pérez-Reverte', 'aperezreverte@gmail.com', 'Reverte', 'reverte')
+('Juan', 'Pérez','jperez@gmail.com', 'JP', 'jp');
+
+INSERT INTO producto SET nombreProducto='Closer', descripcion='Segundo disco de Joy Division del año 1979', precio=30,00,fechaFin='2017-12-15',tipo='Música', nick='JoyDivision', horaFin=00:00:00;
+INSERT INTO producto SET nombreProducto=' Camiseta de Unknown Pleasures', descripcion='Camiseta con la mítica portada del disco de Joy Division', precio=20,00,fechaFin='2017-12-13',tipo='Moda', nick='JoyDivision', horaFin=17:05:00;
+INSERT INTO producto SET nombreProducto='Closer', descripcion='Segundo disco de Joy Division del año 1979', precio=30,00,fechaFin='2017-12-15',tipo='Musica', nick='JoyDivision', horaFin=00:00:00;
+INSERT INTO producto SET nombreProducto='Preludios y Nocturnos firmado', descripcion='Primer tomo de Sandman firmado por su autor', precio=100,00,fechaFin='2018-01-08',tipo='Lectura', nick='Sandman', horaFin=10:00:00;
+INSERT INTO producto SET nombreProducto='American Gods', descripcion='Novela homónima 1ª edición', precio=50,00,fechaFin='2017-12-28',tipo='Lectura', nick='Sandman', horaFin=13:15:00;
+INSERT INTO producto SET nombreProducto='Who killed Amanda Palmer', descripcion='Disco del proyecto de Amanda Palmer en solitario', precio=25,00,fechaFin='2017-12-15',tipo='Musica', nick='Sandman', horaFin=00:00:00;
+INSERT INTO producto SET nombreProducto='Ejército español 1812', descripcion='Miniaturas de 6mm del ejército español del año 1812 durante la Guerra de la Independencia', precio=50,00,fechaFin='2018-02-23',tipo='Juguetes', nick='reverte', horaFin=00:00:00;
+INSERT INTO producto SET nombreProducto='Uniforme español de la batalla de Trafalgar', descripcion='Uniforme de marina española de la batalla de Trafalgar', precio=60,00,fechaFin='2017-12-30',tipo='Moda', nick='reverte', horaFin=22:00:00;
+INSERT INTO producto SET nombreProducto='HP Pavilion 42', descripcion='Ordenador HP Pavilion 42 de segunda mano', precio=200,00,fechaFin='2017-12-27',tipo='Informática', nick='JP', horaFin=16:30:00;
+INSERT INTO producto SET nombreProducto='Tablet bp Aquaris X42', descripcion='Tableta bp en envoltorio original sin abrir', precio=250,00,fechaFin='2017-12-26',tipo='Informática', nick='JP', horaFin=00:00:00;
