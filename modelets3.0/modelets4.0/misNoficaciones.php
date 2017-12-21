@@ -45,13 +45,13 @@
     	    $producto=$rec['nombreProducto'];
     	    $fechaActual=time();
     	    $fechaFin=strtotime("$fecha $hora");
-    	    if ($rec['precio'] !== NULL and $fechaActual > $fechaFin){
+    	    if ($fechaActual > $fechaFin){
     	    	$precioMiPuja=$rec['precio'];
                 $idProd=$rec['id'];
                 $query="SELECT nick,precio FROM puja WHERE precio=(SELECT max(precio) FROM puja WHERE idProd=$idProd)";
-    	    	$resultado=mysqli_query($con,$query);
-    	    	$rec=mysqli_fetch_array($resultado);
-    	    	if ($precioMiPuja < $rec['precio'] ) {
+    	    	$resultado2=mysqli_query($con,$query);
+    	    	$reg=mysqli_fetch_array($resultado2);
+    	    	if ($precioMiPuja < $reg['precio'] ) {
     	    	}
     	    	else{
     	    	    ?>
