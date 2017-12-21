@@ -1,3 +1,7 @@
+<?php
+    session_start();
+?>
+
 <head>
     <meta charset= "UTF-8">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
@@ -21,20 +25,6 @@
         
             
            
-
-
-<?php
-	session_start();
-    $nick=$_SESSION['Nick'];
-    include "conexion.php";
-    date_default_timezone_set('Europe/Madrid');
-    $query="SELECT producto.nombreProducto, producto.id, producto.fechaFin, producto.horaFin, MAX(puja.precio) as precio FROM puja INNER JOIN producto ON puja.idProd=producto.id WHERE puja.nick='$nick' GROUP BY producto.nombreProducto";
-    $resultado=mysqli_query($con,$query);
-    $cont = 0;
-    
-    
-    
-        ?>
          <tr>
                 <td class= table-warning>
                    <strong> Novedades</strong>
@@ -43,24 +33,32 @@
             
             <?php
     
+        $nick=$_SESSION['Nick'];
+        include "conexion.php";
+        date_default_timezone_set('Europe/Madrid');
+        $query="SELECT nombreProducto, producto.id as id, fechaFin, horaFin, MAX(puja.precio) as precio FROM puja INNER JOIN producto ON idProd=producto.id WHERE puja.nick='$nick' GROUP BY nombreProducto";
+        $resultado=mysqli_query($con,$query);
+        $cont = 0;
         while($rec=mysqli_fetch_array($resultado)){
         	$fecha=$rec['fechaFin'];
     	    $hora=$rec['horaFin'];
     	    $producto=$rec['nombreProducto'];
     	    $fechaActual=time();
     	    $fechaFin=strtotime("$fecha $hora");
-    	    if ($rec['precio'] !== NULL and $fechaActual > $fechaFin){
+    	    if ($fechaActual > $fechaFin){
     	    	$precioMiPuja=$rec['precio'];
-    	    	$query="SELECT nick , MAX(precio) AS precio FROM puja WHERE idProd=".$rec['id'];
-    	    	$resultado=mysqli_query($con,$query);
-    	    	$rec=mysqli_fetch_array($resultado);
-    	    	if ($precioMiPuja < $rec['precio'] ) {
+                $idProd=$rec['id'];
+                $query="SELECT nick,precio FROM puja WHERE precio=(SELECT max(precio) FROM puja WHERE idProd=$idProd)";
+    	    	$resultado2=mysqli_query($con,$query);
+    	    	$reg=mysqli_fetch_array($resultado2);
+    	    	if ($precioMiPuja < $reg['precio'] ) {
     	    	}
     	    	else{
     	    	    ?>
     	    	    <tr>
     	    	        <td>
-    	    	            <?php echo "Has ganado la subasta del producto '$producto' por un precio de $precioMiPuja €"; ?>
+    	    	            <?php echo "Has ganado la subasta del producto '$producto' por un precio de $precioMiPuja €"; 
+                            $cont=$cont+1;?>
     	    	        </td>
     	    	    </tr>
     	    		
@@ -69,7 +67,7 @@
 	        }
         }
         
-     if($cont != 0) {
+     if($cont == 0) {
         ?>
             <div class="alert alert-danger" role="alert">
              <?php echo "No hay ninguna notificación..."; ?>
